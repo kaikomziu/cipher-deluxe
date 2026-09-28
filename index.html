@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>暗号解読DELUXE</title>
+<meta name="description" content="Base64、シーザー暗号、モールス、ヴィジュネル…何重にも包まれた暗号を、ページのどこかに隠れた鍵を探しながら解いていく暗号解読パズル。">
+<link rel="canonical" href="https://kaikomziu.github.io/cipher-deluxe/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="暗号解読DELUXE">
+<meta property="og:description" content="Base64を開けたらシーザー暗号、鍵はどこかの数字に…。謎の送信者ELEVENの通信を解読せよ。">
+<meta property="og:url" content="https://kaikomziu.github.io/cipher-deluxe/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">🔐</span>
+    <div>
+      <h1>暗号解読<span>DELUXE</span></h1>
+      <p class="sub">第零解読室 — 謎の送信者「ELEVEN」の通信を解け</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button class="ghost" id="btnDex">📖 暗号図鑑</button>
+    <button class="ghost" id="btnReset" title="進行状況をリセット">↺</button>
+  </div>
+</header>
+
+<nav class="stages" id="stageNav" aria-label="ステージ"></nav>
+
+<main class="layout">
+  <section class="panel mission" id="mission">
+    <div class="mission-head">
+      <span class="stage-no" id="stageNo"></span>
+      <h2 id="stageTitle"></h2>
+      <span class="tag" id="stageTag"></span>
+    </div>
+    <p class="story" id="stageStory"></p>
+    <div class="meta" id="stageMeta"></div>
+    <div id="fragments"></div>
+
+    <form class="answer" id="answerForm" autocomplete="off">
+      <label for="answerInput">合言葉</label>
+      <div class="answer-row">
+        <input id="answerInput" placeholder="解読した合言葉を入力" spellcheck="false">
+        <button type="submit" class="primary">送信</button>
+      </div>
+      <p class="feedback" id="feedback" role="status"></p>
+    </form>
+
+    <div class="hints">
+      <button class="ghost small" id="btnHint">💡 ヒントを見る</button>
+      <ol id="hintList"></ol>
+    </div>
+  </section>
+
+  <section class="panel bench" id="bench">
+    <div class="bench-head">
+      <h2>🛠 ワークベンチ</h2>
+      <div class="bench-btns">
+        <button class="ghost small" id="btnUndo" title="1つ戻す">↶ 戻す</button>
+        <button class="ghost small" id="btnClear">クリア</button>
+      </div>
+    </div>
+    <label class="lbl" for="benchIn">入力</label>
+    <textarea id="benchIn" spellcheck="false" placeholder="ここに暗号文を貼り付けるか、左の「ワークベンチへ」を押す"></textarea>
+
+    <div class="tools" id="tools"></div>
+    <div class="params" id="params"></div>
+
+    <div class="out-head">
+      <label class="lbl" for="benchOut">出力</label>
+      <span class="chain" id="chain"></span>
+    </div>
+    <textarea id="benchOut" readonly spellcheck="false"></textarea>
+    <div class="out-btns">
+      <button class="primary" id="btnApply">↑ 出力を入力へ(もう一段解く)</button>
+      <button class="ghost" id="btnCopy">コピー</button>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="dex" hidden>
+  <div class="modal-card">
+    <button class="close" data-close>×</button>
+    <h2>📖 暗号図鑑</h2>
+    <div id="dexBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="clearModal" hidden>
+  <div class="modal-card center">
+    <div class="stamp">DECRYPTED</div>
+    <p id="clearMsg"></p>
+    <button class="primary" id="btnNext">次の通信へ →</button>
+  </div>
+</div>
+
+<footer class="foot">暗号解読DELUXE — 答えはハッシュで照合しているのでソースを見ても載っていません</footer>
+
+<script src="js/stages.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
